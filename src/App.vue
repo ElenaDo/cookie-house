@@ -38,8 +38,8 @@
                   </div>
                 </div>
               </b-col>
-              <b-col cols="4" class="pl-0 pt-3">
-                <div id="mailbox" class="pt-2">
+              <b-col cols="4" class="pl-0 pt-3" :class="[{'mailbox_fallen': fallenBox}]">
+                <div id="mailbox" @click="fallenBox = true" class="pt-2">
                   <div id="mailbox-cap" class="mx-auto"></div>
                   <span>Mailbox</span>
                 </div>
@@ -60,6 +60,7 @@ export default {
   },
   data: () => ({
     daytime: true,
+    fallenBox: false,
   }),
 };
 </script>
@@ -187,6 +188,13 @@ div.overlay {
   height: 50%;
   background-color: #999;
   bottom: 50px;
+  cursor: pointer;
+  transition: bottom 0.5s ease-in;
+}
+.mailbox_fallen #mailbox{
+  position: absolute;
+  bottom: 0;
+  cursor: auto;
 }
 #mailbox-cap {
   width: 80%;
