@@ -2,9 +2,9 @@
   <div id="app">
     <b-container fluid="sm">
       <div class="house-container mx-auto">
-        <b-row align-h="end" class="mr-3">
+        <b-row align-h="end">
           <b-col cols="4">
-            <div id="sun" class="rounded-circle mt-3 mr-3"></div>
+            <div id="sun" class="rounded-circle mt-3"></div>
           </b-col>
         </b-row>
         <b-row class="d-flex justify-content-center mx-0">
@@ -16,6 +16,12 @@
         </b-row>
         <b-row class="mx-0">
           <div id="house-base" class="mx-auto">
+            <b-row>
+              <b-col v-for="(i, index) in 2" :key="index">
+                <div class="window rounded-circle mt-3">
+                </div>
+              </b-col>
+            </b-row>
           </div>
         </b-row>
       </div>
@@ -77,5 +83,14 @@ export default {
   width: 95%;
   height: 200px;
   background-color: #cccccc;
+}
+.window {
+  display: inline-block;
+  width: 90px;
+  height: 90px;
+  border: 5px solid #a2c5e9;
+  background-color: #d0e1f4;
+  transition: background-color 0.5s ease;
+  z-index: 50;
 }
 </style>
