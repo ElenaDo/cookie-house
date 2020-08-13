@@ -6,7 +6,7 @@
       <div class="house-container mx-auto">
         <b-row align-h="end" class="mx-0">
           <b-col cols="4">
-            <div id="sun" @click="daytime = !daytime" class="rounded-circle mt-3"></div>
+            <div id="sun" @click="daytime = !daytime" class="rounded-circle mx-auto mt-3"></div>
           </b-col>
         </b-row>
         <b-row class="d-flex justify-content-center mx-0">
@@ -26,6 +26,8 @@
             <b-row class="mx-0">
               <b-col v-for="(i, index) in 2" :key="index">
                 <div class="window rounded-circle mt-3">
+                  <div class="cookie">
+                  </div>
                 </div>
               </b-col>
             </b-row>
@@ -95,6 +97,7 @@ div.overlay {
   height: 100px;
   background-color: #fbff00;
   z-index: 101;
+  cursor: pointer;
 }
 .house-container {
   max-width: 450px;
@@ -143,8 +146,22 @@ div.overlay {
   height: 90px;
   border: 5px solid #a2c5e9;
   background-color: #d0e1f4;
-  transition: background-color 0.5s ease;
   z-index: 50;
+}
+.window:hover{
+  background-color: transparent;
+  border: none;
+}
+.cookie {
+  background: url("../public/cookie.png");
+  opacity: 0;
+  background-size: cover;
+  height: 100%;
+  width: 100%;
+  transition: opacity 0.3s;
+}
+.window:hover .cookie{
+  opacity: 1;
 }
 .door-row{
   min-height: 130px;
