@@ -1,10 +1,12 @@
 <template>
-  <div id="app">
-    <b-container fluid="sm">
+  <div id="app" :class="!daytime ? 'dark-mode' : 'light-mode'">
+    <b-container fluid="sm" class="ml-0 px-0">
+      <div class="overlay vw-100 vh-100">
+      </div>
       <div class="house-container mx-auto">
-        <b-row align-h="end">
+        <b-row align-h="end" class="mx-0">
           <b-col cols="4">
-            <div id="sun" class="rounded-circle mt-3"></div>
+            <div id="sun" @click="daytime = !daytime" class="rounded-circle mt-3"></div>
           </b-col>
         </b-row>
         <b-row class="d-flex justify-content-center mx-0">
@@ -16,13 +18,18 @@
         </b-row>
         <b-row class="mx-0">
           <div id="house-base" class="mx-auto">
-            <b-row>
+            <b-row class="mx-0">
+              <div id="bakery-name" class="mt-n4 mx-auto">
+                <h5 class="text-uppercase font-weight-bold">cookie bakery</h5>
+              </div>
+            </b-row>
+            <b-row class="mx-0">
               <b-col v-for="(i, index) in 2" :key="index">
                 <div class="window rounded-circle mt-3">
                 </div>
               </b-col>
             </b-row>
-            <b-row class="door-row" align-h="end">
+            <b-row class="door-row mx-0" align-h="end">
               <b-col cols="4">
                 <div id="door" class="d-flex align-items-center">
                   <div id="door-handle" class="rounded ml-1">
@@ -49,6 +56,9 @@ export default {
   name: 'App',
   components: {
   },
+  data: () => ({
+    daytime: true,
+  }),
 };
 </script>
 
@@ -59,13 +69,32 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+}
+.light-mode {
+  background-color: transparent;
+}
+.dark-mode{
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+div.overlay {
+  position: absolute;
+  z-index: -1;
+  transition: 1s ease;
+}
+.dark-mode div.overlay {
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 50;
 }
 #sun {
   position: relative;
   width: 100px;
   height: 100px;
   background-color: #fbff00;
+  z-index: 101;
 }
 .house-container {
   max-width: 450px;
@@ -97,6 +126,16 @@ export default {
   width: 95%;
   height: auto;
   background-color: #cccccc;
+}
+#bakery-name {
+  width: 200px;
+  height: 50px;
+  color: #2d5814;
+  background-color: #90c678;
+  border: 3px solid #6bad4c;
+}
+#bakery-name h5{
+  line-height: 50px;
 }
 .window {
   display: inline-block;
@@ -136,5 +175,8 @@ export default {
   width: 80%;
   height: 10%;
   background-color: #656565;
+}
+#mailbox span {
+  font-size: 80%;
 }
 </style>
