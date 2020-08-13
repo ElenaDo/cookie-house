@@ -4,8 +4,8 @@
       <div class="overlay vw-100 vh-100">
       </div>
       <div class="house-container mx-auto">
-        <b-row align-h="end" class="mx-0">
-          <b-col cols="4">
+        <b-row align-h="end" class="mx-0" id="sun-row">
+          <b-col cols="col-md-auto mr-1">
             <div id="sun" @click="daytime = !daytime" class="rounded-circle mx-auto mt-3"></div>
           </b-col>
         </b-row>
@@ -38,7 +38,9 @@
                   </div>
                 </div>
               </b-col>
-              <b-col cols="4" class="pl-0 pt-3" :class="[{'mailbox_fallen': fallenBox}]">
+              <b-col cols="4" class="pl-0 pt-3" :class="[{'animate__animated': fallenBox,
+              'animate__swing': fallenBox,
+              'mailbox_fallen': fallenBox}]">
                 <div id="mailbox" @click="fallenBox = true" class="pt-2">
                   <div id="mailbox-cap" class="mx-auto"></div>
                   <span>Mailbox</span>
@@ -100,9 +102,12 @@ div.overlay {
   z-index: 101;
   cursor: pointer;
 }
+#sun-row {
+  height: 100px;
+}
 .house-container {
   max-width: 450px;
-  max-height: 600px;
+  max-height: 100vh;
 }
 #roof {
   width: 95%;
