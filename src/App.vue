@@ -1,6 +1,5 @@
 <template>
   <div id="app" :class="!daytime ? 'dark-mode' : 'light-mode'">
-    <b-container fluid="sm" class="ml-0 px-0">
       <div class="overlay vw-100 vh-100">
       </div>
       <div class="house-container mx-auto">
@@ -33,7 +32,7 @@
             </b-row>
             <b-row class="door-row mx-0" align-h="end">
               <b-col cols="4">
-                <div id="door" class="d-flex align-items-center">
+                <div id="door" @click="createOrder()" class="d-flex align-items-center">
                   <div id="door-handle" class="rounded ml-1">
                   </div>
                 </div>
@@ -50,7 +49,6 @@
           </div>
         </b-row>
       </div>
-    </b-container>
   </div>
 </template>
 
@@ -64,6 +62,21 @@ export default {
     daytime: true,
     fallenBox: false,
   }),
+  methods: {
+    async createOrder() {
+      const response = await fetch('http://localhost:8000', { method: 'POST' });
+      const result = await response;
+      console.log(result);
+      this.makeToast();
+    },
+    makeToast() {
+      this.$bvToast.toast('Your order has been placed', {
+        title: 'Thank you!',
+        autoHideDelay: 3000,
+        appendToast: false,
+      });
+    },
+  },
 };
 </script>
 
