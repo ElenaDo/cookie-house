@@ -65,8 +65,9 @@ export default {
   methods: {
     async createOrder() {
       let ok;
+      const host = process.env.VUE_APP_HOST || 'http://localhost:8000';
       try {
-        const response = await fetch('http://localhost:8000', { method: 'POST' });
+        const response = await fetch(host, { method: 'POST' });
         const result = await response;
         if (result.ok) ok = true;
       } catch (err) {
