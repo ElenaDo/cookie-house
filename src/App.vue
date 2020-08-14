@@ -64,16 +64,32 @@ export default {
   }),
   methods: {
     async createOrder() {
-      const response = await fetch('http://localhost:8000', { method: 'POST' });
-      const result = await response;
-      console.log(result);
-      this.makeToast();
+      let ok;
+      try {
+        const response = await fetch('http://localhost:8000', { method: 'POST' });
+        const result = await response;
+        if (result.ok) ok = true;
+      } catch (err) {
+        console.log(err);
+      }
+
+      let title = 'Thank you!';
+      let message = 'Your order has been placed';
+      let variant = 'info';
+      if (!ok) {
+        title = 'Try again later';
+        message = 'Something went wrong';
+        variant = 'danger';
+      }
+      this.makeToast(title, message, variant);
     },
-    makeToast() {
-      this.$bvToast.toast('Your order has been placed', {
-        title: 'Thank you!',
+    makeToast(title, message, variant) {
+      this.$bvToast.toast(message, {
+        title,
         autoHideDelay: 3000,
         appendToast: false,
+        variant,
+        toaster: 'b-toaster-bottom-center',
       });
     },
   },
@@ -195,6 +211,7 @@ div.overlay {
   height: 130%;
   width: 60%;
   background-color:#f5b465;
+  cursor: pointer;
 }
 #door-handle {
   width: 30px;
